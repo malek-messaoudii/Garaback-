@@ -8,6 +8,8 @@ router.post('/register',userController.register);
 router.get('/getuser/:email',userController.getUserByEmail);
 router.put('/updateuser/:email', userController.updateUser);
 router.put('/update/:email', userController.updateUser1);
+router.get('/getall',userController.getUsers1);
+router.get('/getnomprenom/:email', userController.getNomPrenomByEmail);
 router.get( '/all' ,(req,res)=>{
     user.find()
      .then((AllUsers)=>{res.send(AllUsers);}

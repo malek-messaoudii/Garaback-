@@ -99,11 +99,41 @@ exports.getUserByEmail = async (req, res) => {
   }
 };
 
+exports.getNomPrenomByEmail = async (req, res) => {
+  const uemail = req.params.email;
+
+  try {
+    const user = await User.findOne({ email: uemail }, 'nom prenom');
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    return res.status(200).json({ nom: user.nom, prenom: user.prenom });
+  } catch (error) {
+    console.error('Error fetching user name and surname by email:', error);
+    return res.status(500).json({ message: 'Internal Server Error' });
+  }
+};
+
+
 
 
 exports.getUsers = async (req, res) => {
   try {
     const users = await User.find();
+    res.status(200).json(users);
+  } catch (error) {
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+};
+
+exports.getUsers1 = async (req, res) => {
+  const role = req.query.role;
+
+  try {
+    const query = role ? { role: role } : {};
+    const users = await User.find(query);
     res.status(200).json(users);
   } catch (error) {
     res.status(500).json({ message: 'Internal Server Error' });

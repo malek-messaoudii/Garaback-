@@ -9,6 +9,12 @@ router.put('/valider/:id', devisController.valider);
 router.put('/refuser/:id', devisController.refuser);
 router.put('/recu/:id', devisController.recu);
 router.put('/programme/:id', devisController.programme);
+router.get('/getNumDevisByVehicule/:make/:model/:immatriculation', devisController.getNumDevisByVehicule);
+router.get('/getdevis/:numdevis', devisController.getDevisByNumDevis);
+router.put('/update/:id', devisController.updateDevis);
+
+
+
 
 
 module.exports = router;

@@ -9,21 +9,23 @@ exports.getAllPromotions = async (req, res) => {
   }
 };
 
-exports.addPromotion = async (req, res) => {
-  const { price, description, mois } = req.body;
 
-  if (!price || !description || !mois) {
-    return res.status(400).json({ message: 'Price and description are required.' });
+exports.addPromotion = async (req, res) => {
+  const { price, prestation, mois } = req.body;
+
+  if (!price || !prestation || !prestation.titre || !mois) {
+    return res.status(400).json({ message: 'Price, prestation.titre, and mois are required.' });
   }
 
   try {
-    const newPromotion = new Promotion({ price, description, mois });
+    const newPromotion = new Promotion({ price, prestation, mois });
     await newPromotion.save();
     res.status(201).json(newPromotion);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
+
 
 exports.deletePromotion = async (req, res) => {
   try {

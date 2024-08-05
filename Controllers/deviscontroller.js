@@ -130,3 +130,52 @@ exports.programme =  async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 }
+
+
+exports.getNumDevisByVehicule = async (req, res) => {
+  const { make, model, immatriculation } = req.params;
+
+  try {
+    const devisList = await Devis.find({
+      'vehicule.make': make,
+      'vehicule.model': model,
+      'vehicule.immatriculation': immatriculation
+    }).select('numdevis prestation.titre'); 
+    if (devisList.length === 0) {
+      return res.status(404).json({ message: 'Pas de devis trouvé pour ce véhicule' });
+    }
+
+    res.status(200).json(devisList);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+
+
+
+exports.getDevisByNumDevis = async (req, res) => {
+  const { numdevis } = req.params;
+
+  try {
+    const devis = await Devis.findOne({ numdevis });
+
+    if (!devis) {
+      return res.status(404).json({ message: 'Devis non trouvé pour le numéro sélectionné' });
+    }
+
+    res.status(200).json(devis);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+
+exports.updateDevis = async (req, res) => {
+  try {
+    const updatedDevis = await Devis.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    res.status(200).json(updatedDevis);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};

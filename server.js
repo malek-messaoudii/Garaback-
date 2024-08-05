@@ -9,6 +9,9 @@ const devisRouter = require('./Routes/devis')
 const vehiculeRouter = require ('./Routes/vehicule')
 const rdvRouter = require('./Routes/rdv')
 const promotionRouter = require ('./Routes/promotion')
+const mecanicienRouter = require ('./Routes/mecanicien')
+const intervRouter = require ('./Routes/intervention')
+const reservationRouter = require ('./Routes/reservation')
 
 
 app.use(cors({
@@ -20,15 +23,15 @@ app.use(cors({
 const router = express.Router();
 
 app.use(express.json());
-
 app.use('/promotions', promotionRouter);
 app.use('/user', userRouter);
 app.use('/formcontact', formcontactRouter);
 app.use('/devis', devisRouter);
 app.use('/vehicules', vehiculeRouter);
 app.use('/rdv', rdvRouter);
-
-
+app.use('/mecanicien', mecanicienRouter);
+app.use('/interventions', intervRouter)
+app.use('/reservation', reservationRouter)
 
 
 

@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
 
-const devisSchema = new Schema({
+const devisSchema = new mongoose.Schema({
   vehicule: {
     make: { type: String },
     model: { type: String },
@@ -15,7 +14,7 @@ const devisSchema = new Schema({
     desc: { type: String }
   },
   utilisateur: {
-    type: { type: String, enum: ['particulier', 'entreprise'] },
+    type: { type: String, enum: ['particulier', 'entreprise'] }, // Update here
     nom: { type: String },
     prenom: { type: String},
     email: { type: String},

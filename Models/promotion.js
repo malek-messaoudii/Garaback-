@@ -5,15 +5,16 @@ const promotionSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
-  description: {
-    type: String,
-    required: true
+  prestation: {
+    titre: {
+      type: String,
+      required: true
+    },
   },
   mois: {
     type: String,
     required: true
   }
-  
 });
 
 const Promotion = mongoose.model('Promotion', promotionSchema);
